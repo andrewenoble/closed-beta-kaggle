@@ -1,25 +1,32 @@
-# Network Anomaly Detection and PCA
+# Bin packing closed beta kaggle competition
 
-By [Andrew Noble](http://two.ucdavis.edu/~andrewnoble)
+By [Andrew Noble](http://andrewnoble.com)
 
 ## About
 
-This repo contains the Python files used to demonstrate the utility of a Principal Component Analysis (PCA) as a simple and scalable first step in searching for anomalous behavior in large spatiotemporal data sets.  Two such data sets, one on the San Francisco bike share program and the other on UK measles outbreaks following World War II, are analyzed here.  Code in the ```bikeshare``` directory reproduces the results discussed on [this webpage](http://two.ucdavis.edu/~andrewnoble/bikeshare.html).  Code in the ```measles``` directory reproduces the results discussed on [this webpage](http://two.ucdavis.edu/~andrewnoble/measles.html).  Code in the ```util``` directory is used by both ```bikeshare``` and ```measles```.
+The co-founders of a startup company invited 16 experts in machine learning and optimization to participate in a closed-beta competition to test a kaggle-type platform aimed at harnessing the best of human and artificial intelligence to create optimal solutions.  The challenge was to formulate a heuristic solution to the optimal packing of 144 floats into 12 bins such that the difference between the largest and smallest bin sums (the "maximum difference") is minimized. Participants were provided with the sample set of 144 floats in ```sample_numbers```.  Submitted solutions were run on >10 sample sets.  Solutions scores were calculated as the sum of maximum differences across all sample sets.  The soution here took 3rd place with a score ~3 times higher than the top two entries, both submitted by postdocs in quantum computing at ETH Zurich, but ~100 better than 4th place entry.  
+
+![alt text](https://github.com/andrewenoble/closed-beta-kaggle/top_three_scores.png "Final scoreboard for top 3 entries.")
+
 
 ## Requirements
 
-* Python (numpy, scipy, pandas, pickle, cartopy, matplotlib, pylab)
+* C++ compiler
 
 ## Usage
 
 Clone the repo.
 ```
-git clone https://github.com/andrewenoble/net-detect.git
-cd net-detect
+git clone https://github.com/andrewenoble/closed-beta-kaggle.git
+cd closed-beta-kaggle
 ```
-From the ```net-detect``` directory,  decend into either the ```measles``` or ```bikeshare``` directory.  Further usage instructions can be found there in another README.md file.
+Compile.
+```
+clang++ -std=c++11 -O3 bin_packing_heuristic.cpp
+```
+Run on test sample.
+```
+./a.out sample_numbers.txt 
+```
+The output lists the numbers placed in each of the 12 bins as well as the sum of the numbers in each bin and the difference between the largest and smallest sum.   
 
-## Acknowledgements
-
-This work is support by an [NSF
-INSPIRE award](http://www.nsf.gov/awardsearch/showAward?AWD_ID=1344187&amp;HistoricalAwards=false) from the National Science Foundation.  
